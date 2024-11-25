@@ -1,10 +1,1 @@
-cp padavan_logo.png padavan-ng/trunk/user/www/n56u_ribbon_fixed/bootstrap/img
-cp loading_bg.png padavan-ng/trunk/user/www/n56u_ribbon_fixed/bootstrap/img
-cp itoggle.png padavan-ng/trunk/user/www/n56u_ribbon_fixed/bootstrap/img
-cp glyphicons-halflings-white.png padavan-ng/trunk/user/www/n56u_ribbon_fixed/bootstrap/img
-cp glyphicons-halflings.png padavan-ng/trunk/user/www/n56u_ribbon_fixed/bootstrap/img
-cp dark-bg.jpg padavan-ng/trunk/user/www/n56u_ribbon_fixed/bootstrap/img
-cp arrow-right.png padavan-ng/trunk/user/www/n56u_ribbon_fixed/bootstrap/img
-cp ajax-loader.gif padavan-ng/trunk/user/www/n56u_ribbon_fixed/bootstrap/img
-cp engage.itoggle.css padavan-ng/trunk/user/www/n56u_ribbon_fixed/bootstrap/css
-cp main.css padavan-ng/trunk/user/www/n56u_ribbon_fixed/bootstrap/css
+cp padavan_logo.png loading_bg.png itoggle.png glyphicons-halflings-white.png glyphicons-halflings.png dark-bg.jpg arrow-right.png ajax-loader.gif padavan-ng/trunk/user/www/n56u_ribbon_fixed/bootstrap/img && cp engage.itoggle.css main.css padavan-ng/trunk/user/www/n56u_ribbon_fixed/bootstrap/css
