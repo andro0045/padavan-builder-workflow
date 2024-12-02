@@ -5,3 +5,6 @@ cp padavan_logo.png loading_bg.png itoggle.png glyphicons-halflings-white.png \
 
 # Копирование CSS файлов в директорию css
 cp engage.itoggle.css main.css padavan-ng/trunk/user/www/n56u_ribbon_fixed/bootstrap/css/
+
+# Отключение log wireguard debug
+cp build_firmware.sh padavan-ng/trunk
