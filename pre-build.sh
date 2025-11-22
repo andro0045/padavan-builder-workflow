@@ -7,10 +7,14 @@ cp padavan_logo.png loading_bg.png itoggle.png glyphicons-halflings-white.png \
 cp engage.itoggle.css main.css padavan-ng/trunk/user/www/n56u_ribbon_fixed/bootstrap/css/
 
 
-TRUNK="$(pwd)/trunk"
-TMP="/tmp/zapret-v72.2"
-
-rm -rf "$TRUNK/user/nfqws"
-git clone --depth 1 --branch v72.2 https://github.com/bol-van/zapret.git "$TMP"
-cp -r "$TMP/nfqws" "$TRUNK/user/"
-rm -rf "$TMP"
+NFQWS_DIR="$PADAVAN_BUILD_PATH/trunk/user/nfqws"
+cd /tmp
+rm -rf zapret-v72.2
+wget -q https://github.com/bol-van/zapret/archive/refs/tags/v72.2.tar.gz
+tar -xzf v72.2.tar.gz
+cd zapret-v72.2
+rm -rf "$NFQWS_DIR"/*
+cp -a nfq/* "$NFQWS_DIR/"
+cp -a shared/* "$NFQWS_DIR/"
+cp -a zapret-72.2.tar.gz "$NFQWS_DIR/"
+echo "zapret nfqws updated to v72.2"
