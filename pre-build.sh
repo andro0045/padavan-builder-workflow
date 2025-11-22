@@ -17,7 +17,7 @@ git -C "$BASE/nfqws-new" checkout "$TAG"
 rm -rf "$BASE/nfqws-new/.git" "$BASE/nfqws-new/.github" "$BASE/nfqws-new/tools"
 cp -f "$BASE/nfqws/Makefile" "$BASE/nfqws-new/Makefile" 2>/dev/null || true
 cp -f "$BASE/nfqws/zapret.sh" "$BASE/nfqws-new/zapret.sh" 2>/dev/null || true
-rm -rf "$BASE/nfqws"
-mv "$BASE/nfqws-new" "$BASE/nfqws"
+rm -rf "$BASE/nfqws"; mv "$BASE/nfqws-new" "$BASE/nfqws"
 find "$BASE/nfqws" -type f -name Makefile -exec sed -i 's/-flto[^ ]*//g' {} +
+export CFLAGS="${CFLAGS//-flto/}"; export CXXFLAGS="${CXXFLAGS//-flto/}"
 echo ">>> nfqws обновлён до $TAG, LTO отключен"
