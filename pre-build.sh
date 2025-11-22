@@ -7,10 +7,9 @@ cp padavan_logo.png loading_bg.png itoggle.png glyphicons-halflings-white.png \
 cp engage.itoggle.css main.css padavan-ng/trunk/user/www/n56u_ribbon_fixed/bootstrap/css/
 
 set -e
-
 cd padavan-ng/trunk/user
-rm -rf zapret
-git clone https://github.com/bol-van/zapret.git zapret
-cd zapret
+rm -rf nfqws
+git clone https://github.com/bol-van/zapret.git nfqws
+cd nfqws
 git checkout v72.2
 rm -rf .git .github tools
