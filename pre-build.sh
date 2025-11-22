@@ -8,15 +8,14 @@ cp engage.itoggle.css main.css padavan-ng/trunk/user/www/n56u_ribbon_fixed/boots
 
 
 set -e
-cd padavan-ng/trunk/user
-git clone https://github.com/bol-van/zapret.git nfqws-new
-cd nfqws-new
+
+git clone https://github.com/bol-van/zapret.git padavan-ng/trunk/user/nfqws-new
 LATEST_TAG=$(git ls-remote --tags https://github.com/bol-van/zapret.git | awk -F'/' '{print $3}' | grep -E '^v[0-9]+' | sort -V | tail -n1)
-git checkout "$LATEST_TAG"
-rm -rf .git .github tools
-cp -f ../nfqws/Makefile ./Makefile 2>/dev/null || true
-cp -f ../nfqws/zapret.sh ./zapret.sh 2>/dev/null || true
-cd ..
-rm -rf nfqws
-mv nfqws-new nfqws
-echo ">>> nfqws обновлён до $LATEST_TAG"
+git -C padavan-ng/trunk/user/nfqws-new checkout "$LATEST_TAG"
+rm -rf padavan-ng/trunk/user/nfqws-new/.git padavan-ng/trunk/user/nfqws-new/.github padavan-ng/trunk/user/nfqws-new/tools
+cp -f padavan-ng/trunk/user/nfqws/Makefile padavan-ng/trunk/user/nfqws-new/Makefile 2>/dev/null || true
+cp -f padavan-ng/trunk/user/nfqws/zapret.sh padavan-ng/trunk/user/nfqws-new/zapret.sh 2>/dev/null || true
+rm -rf padavan-ng/trunk/user/nfqws
+mv padavan-ng/trunk/user/nfqws-new padavan-ng/trunk/user/nfqws
+sed -i 's/-flto//g' padavan-ng/trunk/user/nfqws/Makefile
+echo ">>> nfqws обновлён до $LATEST_TAG и LTO отключен"
