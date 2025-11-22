@@ -17,5 +17,5 @@ cp -f padavan-ng/trunk/user/nfqws/Makefile padavan-ng/trunk/user/nfqws-new/Makef
 cp -f padavan-ng/trunk/user/nfqws/zapret.sh padavan-ng/trunk/user/nfqws-new/zapret.sh 2>/dev/null || true
 rm -rf padavan-ng/trunk/user/nfqws
 mv padavan-ng/trunk/user/nfqws-new padavan-ng/trunk/user/nfqws
-sed -i 's/-flto//g' padavan-ng/trunk/user/nfqws/Makefile
+find padavan-ng/trunk/user/nfqws -name Makefile -exec sed -i 's/-flto[^ ]*//g' {} +
 echo ">>> nfqws обновлён до $LATEST_TAG и LTO отключен"
