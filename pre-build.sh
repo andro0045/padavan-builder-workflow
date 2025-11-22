@@ -7,12 +7,10 @@ cp padavan_logo.png loading_bg.png itoggle.png glyphicons-halflings-white.png \
 cp engage.itoggle.css main.css padavan-ng/trunk/user/www/n56u_ribbon_fixed/bootstrap/css/
 
 
-
 TRUNK="$(pwd)/trunk"
-ZAPRET="/tmp/zapret"
+TMP="/tmp/zapret-v72.2"
 
 rm -rf "$TRUNK/user/nfqws"
-[ -d "$ZAPRET" ] || git clone https://github.com/bol-van/zapret.git "$ZAPRET"
-cd "$ZAPRET" && git fetch --tags && git checkout v72.2
-cp -r nfqws "$TRUNK/user/"
-rm -rf "$ZAPRET"
+git clone --depth 1 --branch v72.2 https://github.com/bol-van/zapret.git "$TMP"
+cp -r "$TMP/nfqws" "$TRUNK/user/"
+rm -rf "$TMP"
