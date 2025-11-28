@@ -15,4 +15,4 @@ cp engage.itoggle.css main.css padavan-ng/trunk/user/www/n56u_ribbon_fixed/boots
 # -----------------------------
 rm -rf padavan-ng/trunk/user/nfqws
 mkdir -p padavan-ng/trunk/user/nfqws
-unzip -jo nfqws.zip -d padavan-ng/trunk/user/nfqws
+unzip -o nfqws.zip -d padavan-ng/trunk/user/nfqws
