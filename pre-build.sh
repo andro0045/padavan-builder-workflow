@@ -17,14 +17,14 @@ rm -rf padavan-ng/trunk/user/nfqws
 mkdir -p padavan-ng/trunk/user/nfqws
 unzip -o nfqws.zip -d padavan-ng/trunk/user/nfqws
 
-# отключаем LTO для всех zapret исходников
-for dir in padavan-ng/trunk/user/zapret*; do
+# отключаем LTO во всех zapret и nfqws исходниках
+for dir in padavan-ng/trunk/user/zapret* padavan-ng/trunk/user/nfqws/zapret-*; do
   [ -d "$dir" ] || continue
   find "$dir" -type f -exec sed -i 's/-flto[^ ]*//g' {} +
   find "$dir" -type f -exec sed -i 's/-fuse-linker-plugin//g' {} +
 done
 
 # убрать LTO из переменных окружения
-export CFLAGS="${CFLAGS/-flto/}"
-export CXXFLAGS="${CXXFLAGS/-flto/}"
-export LDFLAGS="${LDFLAGS/-flto/}"
+export CFLAGS="${CFLAGS/-flto*/}"
+export CXXFLAGS="${CXXFLAGS/-flto*/}"
+export LDFLAGS="${LDFLAGS/-flto*/}"
