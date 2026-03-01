@@ -25,6 +25,7 @@ for dir in padavan-ng/trunk/user/zapret*; do
   find "$dir" -type f -exec sed -i 's/-flto[^ ]*//g' {} + 2>/dev/null
   find "$dir" -type f -exec sed -i 's/-fuse-linker-plugin//g' {} + 2>/dev/null
 done
+
 # Очистить флаги LTO из переменных окружения
 export CFLAGS="${CFLAGS/-flto/}"
 export CXXFLAGS="${CXXFLAGS/-flto/}"
