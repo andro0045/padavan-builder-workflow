@@ -17,6 +17,3 @@ rm -rf padavan-ng/trunk/user/nfqws
 mkdir -p padavan-ng/trunk/user/nfqws
 unzip -o nfqws.zip -d padavan-ng/trunk/user/nfqws
 
-# отключить LTO
-find . -type f -exec sed -i 's/-flto//g' {} +
-find . -type f -exec sed -i 's/-fuse-linker-plugin//g' {} +
