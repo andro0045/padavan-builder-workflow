@@ -30,7 +30,7 @@ endif()
 string(APPEND CMAKE_C_FLAGS " -Wall -Wextra -Wpedantic -Wstrict-aliasing -Wformat=2 -Wunused -Wno-variadic-macros")
 string(APPEND CMAKE_C_FLAGS " -Wnull-dereference -Wshadow -Wconversion -Wsign-conversion -Wfloat-conversion -Wundef")
 string(APPEND CMAKE_C_FLAGS " -Wimplicit-fallthrough -Wstrict-overflow=2 -Wredundant-decls -Wdouble-promotion")
-string(APPEND CMAKE_C_FLAGS " -fstack-protector-strong -D_FORTIFY_SOURCE=3 -fPIE")
+string(APPEND CMAKE_C_FLAGS " -D_FORTIFY_SOURCE=2")
 
 set(CMAKE_C_FLAGS_DEBUG "-gdwarf-4 -DDEBUG")
 set(CMAKE_C_FLAGS_RELEASE "-O2")
