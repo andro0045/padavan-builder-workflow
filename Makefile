@@ -71,6 +71,12 @@ nft_cflags =    `echo $(COPTS) | $(top)/bld/pkg-wrapper HAVE_NFTSET $(PKG_CONFIG
 nft_libs =      `echo $(COPTS) | $(top)/bld/pkg-wrapper HAVE_NFTSET $(PKG_CONFIG) --libs libnftables`
 version =       -DVERSION='\"`$(top)/bld/get-version $(top)`\"'
 
+have_regex = $(shell if echo $(COPTS) | grep HAVE_REGEX >/dev/null 2>&1; then echo yes; fi)
+ifeq ($(have_regex), yes)
+pcre_libname = $(shell if echo $(COPTS) | grep HAVE_PCRE2 >/dev/null 2>&1; then echo libpcre2-8; else echo libpcre; fi)
+pcre_cflags =  `$(PKG_CONFIG) --cflags $(pcre_libname)`
+pcre_libs =    `$(PKG_CONFIG) --libs $(pcre_libname)`
+endif
 sum?=$(shell echo $(CC) -DDNSMASQ_COMPILE_FLAGS="$(CFLAGS)" -DDNSMASQ_COMPILE_OPTS $(COPTS) -E $(top)/$(SRC)/dnsmasq.h | ( md5sum 2>/dev/null || md5 ) | cut -f 1 -d ' ')
 sum!=echo $(CC) -DDNSMASQ_COMPILE_FLAGS="$(CFLAGS)" -DDNSMASQ_COMPILE_OPTS $(COPTS) -E $(top)/$(SRC)/dnsmasq.h | ( md5sum 2>/dev/null || md5 ) | cut -f 1 -d ' '
 copts_conf = .copts_$(sum)
@@ -89,8 +95,8 @@ hdrs = dnsmasq.h config.h dhcp-protocol.h dhcp6-protocol.h \
 all : $(BUILDDIR)
 	@cd $(BUILDDIR) && $(MAKE) \
  top="$(top)" \
- build_cflags="$(version) $(dbus_cflags) $(idn2_cflags) $(idn_cflags) $(ct_cflags) $(lua_cflags) $(nettle_cflags) $(nft_cflags)" \
- build_libs="$(dbus_libs) $(idn2_libs) $(idn_libs) $(ct_libs) $(lua_libs) $(sunos_libs) $(nettle_libs) $(gmp_libs) $(ubus_libs) $(nft_libs)" \
+ build_cflags="$(version) $(dbus_cflags) $(idn2_cflags) $(idn_cflags) $(ct_cflags) $(lua_cflags) $(nettle_cflags) $(nft_cflags) $(pcre_cflags)" \
+ build_libs="$(dbus_libs) $(idn2_libs) $(idn_libs) $(ct_libs) $(lua_libs) $(sunos_libs) $(nettle_libs) $(gmp_libs) $(ubus_libs) $(nft_libs) $(pcre_libs)" \
  -f $(top)/Makefile dnsmasq 
 
 mostly_clean :
