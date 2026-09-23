@@ -627,7 +627,7 @@ SendSSDPResponse(int s, const struct sockaddr * addr,
 	       n, addr_str, l, buf);
 	if(n < 0)
 	{
-		syslog(LOG_ERR, "%s: sendto(udp): %m",
+		syslog(LOG_DEBUG, "%s: sendto(udp): %m",
 		       "SendSSDPResponse()");
 	}
 }
