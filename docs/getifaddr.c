@@ -74,7 +74,7 @@ getifaddr(const char * ifname, char * buf, int len,
 		} else {
 			r = GETIFADDR_IOCTL_ERROR;
 		}
-		syslog(LOG_ERR, "ioctl(s, SIOCGIFADDR, ...): %m");
+		syslog(LOG_DEBUG, "ioctl(s, SIOCGIFADDR, ...): %m");
 		close(s);
 		return r;
 	}
@@ -91,7 +91,7 @@ getifaddr(const char * ifname, char * buf, int len,
 		strncpy(ifr.ifr_name, ifname, IFNAMSIZ-1);
 		ifr.ifr_name[IFNAMSIZ-1] = '\0';
 		if(ioctl(s, SIOCGIFNETMASK, &ifr, &ifrlen) < 0) {
-			syslog(LOG_ERR, "ioctl(s, SIOCGIFNETMASK, ...): %m");
+			syslog(LOG_DEBUG, "ioctl(s, SIOCGIFNETMASK, ...): %m");
 			close(s);
 			return GETIFADDR_IOCTL_ERROR;
 		}
@@ -111,7 +111,7 @@ getifaddr(const char * ifname, char * buf, int len,
 	if(!ifname || ifname[0]=='\0')
 		return GETIFADDR_BAD_ARGS;
 	if(getifaddrs(&ifap) < 0) {
-		syslog(LOG_ERR, "getifaddrs: %m");
+		syslog(LOG_DEBUG, "getifaddrs: %m");
 		return GETIFADDR_GETIFADDRS_ERROR;
 	}
 	for(ife = ifap; ife; ife = ife->ifa_next) {
@@ -174,7 +174,7 @@ int getifaddr_in6(const char * ifname, int af, struct in6_addr * addr)
 		return -1;
 	if(getifaddrs(&ifap)<0)
 	{
-		syslog(LOG_ERR, "getifaddrs: %m");
+		syslog(LOG_DEBUG, "getifaddrs: %m");
 		return -1;
 	}
 	for(ife = ifap; ife && !found; ife = ife->ifa_next)
@@ -249,7 +249,7 @@ find_ipv6_addr(const char * ifname,
 
 	if(getifaddrs(&ifap)<0)
 	{
-		syslog(LOG_ERR, "getifaddrs: %m");
+		syslog(LOG_DEBUG, "getifaddrs: %m");
 		return -1;
 	}
 	for(ife = ifap; ife; ife = ife->ifa_next)
