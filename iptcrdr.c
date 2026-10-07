@@ -15,7 +15,7 @@
 #include <arpa/inet.h>
 #include <dlfcn.h>
 #include <xtables.h>
-#include <linux/netfilter/xt_DSCP.h>
+#include <linux/netfilter/xt_dscp.h>
 #include <libiptc/libiptc.h>
 
 #include <linux/version.h>
@@ -1093,16 +1093,16 @@ static struct ipt_entry_target *
 get_dscp_target(unsigned char dscp)
 {
 	struct ipt_entry_target * target;
-	struct xt_DSCP_info * di;
+	struct xt_dscp_info * di;
 	size_t size;
 
 	size =   IPT_ALIGN(sizeof(struct ipt_entry_target))
-	       + IPT_ALIGN(sizeof(struct xt_DSCP_info));
+	       + IPT_ALIGN(sizeof(struct xt_dscp_info));
 	target = calloc(1, size);
 	target->u.target_size = size;
 	strncpy(target->u.user.name, "DSCP", sizeof(target->u.user.name));
 	/* one ip_nat_range already included in ip_nat_multi_range */
-	di = (struct xt_DSCP_info *)&target->data[0];
+	di = (struct xt_dscp_info *)&target->data[0];
 	di->dscp=dscp;
 	return target;
 }
