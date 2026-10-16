@@ -881,7 +881,7 @@ int main (int argc, char **argv)
 	my_syslog(LOG_INFO, _("DNS service limited to localhost"));
     }
   
-  my_syslog(LOG_INFO, _("compile time options: %s"), compile_opts);
+  // my_syslog(LOG_INFO, _("compile time options: %s"), compile_opts);
 
   if (chown_warn != 0)
     {
