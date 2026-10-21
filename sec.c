@@ -14,8 +14,8 @@
 
 #include <sys/prctl.h>
 #include <sys/syscall.h>
-#include <linux/securebits.h>
-#include <linux/seccomp.h>
+// #include <linux/securebits.h>
+// #include <linux/seccomp.h>
 #include <linux/filter.h>
 // __X32_SYSCALL_BIT defined in linux/unistd.h
 #include <linux/unistd.h>
