@@ -14,8 +14,8 @@
 
 #include <sys/prctl.h>
 #include <sys/syscall.h>
-#include <linux/securebits.h>
-#include <linux/seccomp.h>
+//#include <linux/securebits.h>
+//#include <linux/seccomp.h>
 #include <linux/filter.h>
 // __X32_SYSCALL_BIT defined in linux/unistd.h
 #include <linux/unistd.h>
@@ -116,6 +116,8 @@ static void set_filter(struct sock_filter *filter, __u16 code, __u8 jt, __u8 jf,
 // deny all blocked syscalls
 static bool set_seccomp(void)
 {
+	return true;
+#if 0
 #ifdef __X32_SYSCALL_BIT
  #define SECCOMP_PROG_SIZE (6 + BLOCKED_SYSCALL_COUNT)
 #else
@@ -151,9 +153,12 @@ static bool set_seccomp(void)
 	set_filter(&prog.filter[idx++], BPF_RET + BPF_K, 0, 0, SECCOMP_RET_KILL); // fail case
 	return prctl(PR_SET_SECCOMP, SECCOMP_MODE_FILTER, &prog) >= 0;
 }
+#endif
 
 bool sec_harden(void)
 {
+	return false;
+#if 0
 	bool bRes = true;
 	if (prctl(PR_SET_NO_NEW_PRIVS, 1, 0, 0, 0))
 	{
@@ -169,10 +174,8 @@ bool sec_harden(void)
 	}
 #endif
 	return bRes;
+#endif
 }
-
-
-
 
 bool checkpcap(uint64_t caps)
 {
@@ -267,15 +270,8 @@ bool droproot(uid_t uid, const char *user, const gid_t *gid, int gid_count)
 #ifdef __linux__
 	if (prctl(PR_SET_KEEPCAPS, 1L))
 	{
-		int e=errno;
-		// if SECBIT_NO_SETUID_FIXUP is set PR_SET_KEEPCAPS is not necessary
-		int bits = prctl(PR_GET_SECUREBITS);
-		if (bits<0 || !(bits & SECBIT_NO_SETUID_FIXUP))
-		{
-			errno=e;
-			DLOG_PERROR("prctl(PR_SET_KEEPCAPS)");
-			return false;
-		}
+		DLOG_PERROR("prctl(PR_SET_KEEPCAPS)");
+		return false;
 	}
 #endif
 	if (user)
@@ -284,8 +280,8 @@ bool droproot(uid_t uid, const char *user, const gid_t *gid, int gid_count)
 		// better to leave it to the os
 		if (initgroups(user,gid[0]))
 		{
-			DLOG_PERROR("initgroups");
-			return false;
+		DLOG_PERROR("prctl(PR_SET_KEEPCAPS)");
+		return false;
 		}
 	}
 	else
