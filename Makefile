@@ -1,10 +1,8 @@
 CC ?= cc
 OPTIMIZE ?= -Os
-CFLAGS_PIC = -fPIC
 CFLAGS += -std=gnu99 $(OPTIMIZE)
 CFLAGS_BSD = -Wno-address-of-packed-member
 CFLAGS_WIN = -static
-LDFLAGS_PIE = -pie
 
 LIBS = 
 LIBS_WIN = -lws2_32
@@ -13,7 +11,7 @@ SRC_FILES = ip2net.c qsort.c
 all: ip2net
 
 ip2net: $(SRC_FILES)
-	$(CC) -s $(CFLAGS) $(CFLAGS_PIC) -o ip2net $(SRC_FILES) $(LIBS) $(LDFLAGS) $(LDFLAGS_PIE)
+	$(CC) -s $(CFLAGS) -o ip2net $(SRC_FILES) $(LIBS) $(LDFLAGS)
 
 systemd: ip2net
 
@@ -37,3 +35,4 @@ win-arm64-cross:
 
 clean:
 	rm -f ip2net *.o
+
